@@ -154,7 +154,7 @@
                                 >
                                     <el-input
                                         v-model="cacheForm.cacheName"
-                                        :readOnly="true"
+                                        :readonly="true"
                                     />
                                 </el-form-item>
                             </el-col>
@@ -162,7 +162,7 @@
                                 <el-form-item label="缓存键名:" prop="cacheKey">
                                     <el-input
                                         v-model="cacheForm.cacheKey"
-                                        :readOnly="true"
+                                        :readonly="true"
                                     />
                                 </el-form-item>
                             </el-col>
@@ -175,7 +175,7 @@
                                         v-model="cacheForm.cacheValue"
                                         type="textarea"
                                         :rows="8"
-                                        :readOnly="true"
+                                        :readonly="true"
                                     />
                                 </el-form-item>
                             </el-col>
