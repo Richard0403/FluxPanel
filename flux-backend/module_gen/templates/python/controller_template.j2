@@ -22,7 +22,7 @@ from {{ packageName }}.service.{{ tableName }}_service import {{ tableName|snake
 {{ tableName|snake_to_camel }}Controller = APIRouter(prefix='/{{ moduleName }}/{{ businessName }}', dependencies=[Depends(LoginService.get_current_user)])
 
 
-@{{ tableName|snake_to_camel }}Controller.get('/list', dependencies=[Depends(CheckUserInterfaceAuth('{{ permissionPrefix }}:list'))])
+@{{ tableName|snake_to_camel }}Controller.get('/list', dependencies=[Depends(CheckUserInterfaceAuth('{{ permissionPrefix }}:query'))])
 async def get_{{ tableName }}_list(
         request: Request,
         query_db: AsyncSession = Depends(get_db),
@@ -33,7 +33,7 @@ async def get_{{ tableName }}_list(
 
     return ResponseUtil.success(model_content={{ tableName }}_result)
 
-@{{ tableName|snake_to_camel }}Controller.get('/getById/{{ '{' }}{{ tableName|snake_to_camel }}Id{{ '}' }}', dependencies=[Depends(CheckUserInterfaceAuth('{{ permissionPrefix }}:list'))])
+@{{ tableName|snake_to_camel }}Controller.get('/getById/{{ '{' }}{{ tableName|snake_to_camel }}Id{{ '}' }}', dependencies=[Depends(CheckUserInterfaceAuth('{{ permissionPrefix }}:query'))])
 async def get_{{ tableName }}_by_id(
         request: Request,
         {{ tableName|snake_to_camel }}Id: int,
@@ -70,7 +70,7 @@ async def update_{{ tableName }}(
     return ResponseUtil.success(data=add_dict_type_result)
 
 
-@{{ tableName|snake_to_camel }}Controller.delete('/delete/{{ '{' }}{{ tableName|snake_to_camel }}Ids{{ '}' }}', dependencies=[Depends(CheckUserInterfaceAuth('{{ permissionPrefix }}:del'))])
+@{{ tableName|snake_to_camel }}Controller.delete('/delete/{{ '{' }}{{ tableName|snake_to_camel }}Ids{{ '}' }}', dependencies=[Depends(CheckUserInterfaceAuth('{{ permissionPrefix }}:remove'))])
 @Log(title='{{ tableName }}', business_type=BusinessType.DELETE)
 async def del_{{ tableName }}(
     request: Request,
